@@ -18,10 +18,14 @@ import javafx.scene.layout.Priority;
 import javafx.stage.Stage;
 
 
+
+
+
+
 public class Main extends Application {
 
 Socket socket;
-TextArea textArea ;
+TextArea textArea;
 
 //클라이언트 프로그램 동작 메소드
 
@@ -86,7 +90,9 @@ public void receive() {
 		Platform.runLater(()->
 		{
 			textArea.appendText(message);
-		});	
+		});
+		
+		
 		} catch (Exception e) {
                     StopClient();
                     break;
@@ -116,9 +122,9 @@ public void receive() {
 		hbox.getChildren().addAll(userName,IPText,portText);
 		root.setTop(hbox);
 		
-		textArea = new TextArea();
-		textArea.setEditable(false);
-		root.setCenter(textArea);
+		TextArea textarea = new TextArea();
+		textarea.setEditable(false);
+		root.setCenter(textarea);
 		
 		TextField input = new TextField();
 		input.setPrefWidth(Double.MAX_VALUE);
@@ -156,7 +162,7 @@ public void receive() {
 			}
 				StartClient(IPText.getText(), port);
 			    Platform.runLater(()->{
-			    	textArea.appendText("[채팅방 접속]\n");
+			    	textarea.appendText("[채팅방 접속]\n");
 			    	  connectionButton.setText("종료하기");
 			    });
 		
@@ -164,7 +170,7 @@ public void receive() {
 		}else {
 			StopClient();
 		Platform.runLater(()->{
-			textArea.appendText("[채팅방 퇴장]\n");
+	    	textarea.appendText("[채팅방 퇴장]\n");
 	    	connectionButton.setText("접속하기");
 		});
 	
